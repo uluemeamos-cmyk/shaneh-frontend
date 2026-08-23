@@ -1,3 +1,3 @@
 // config.js — point this at your deployed backend (Render/Railway/etc).
 // While testing locally, leave as http://localhost:4242
-https://shaneh-backend.onrender.com
+const API_BASE_URL = "https://shaneh-backend.onrender.com";
