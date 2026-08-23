@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Booking confirmed — Shaneh No Limit Experience</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap nav">
+    <a href="/" class="logo">Shaneh <span>No Limit</span></a>
+  </div>
+</header>
+
+<section>
+  <div class="wrap" style="max-width:560px; text-align:center; padding-top:40px;">
+    <span class="eyebrow" style="justify-content:center;">Booking</span>
+    <h1 style="margin-top:14px;" id="status-heading">Confirming your payment…</h1>
+    <p id="status-body" style="color:var(--ink-soft); margin-top:12px;">Hang tight, this only takes a second.</p>
+    <div id="details" style="margin-top:28px; text-align:left; display:none;">
+      <div class="testi">
+        <p id="d-item"></p>
+        <footer id="d-amount"></footer>
+      </div>
+    </div>
+    <a href="/" class="btn outline" style="margin-top:32px;">Back to home</a>
+  </div>
+</section>
+
+<script src="js/config.js"></script>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const bookingId = params.get("booking_id");
+  const heading = document.getElementById("status-heading");
+  const body = document.getElementById("status-body");
+  const details = document.getElementById("details");
+
+  async function poll(attempt = 0) {
+    if (!bookingId) {
+      heading.textContent = "No booking found";
+      body.textContent = "We couldn't find a booking reference in the URL.";
+      return;
+    }
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/checkout/booking/${bookingId}`);
+      const booking = await res.json();
+
+      if (booking.status === "paid") {
+        heading.textContent = "You're all set!";
+        body.textContent = `A confirmation has been sent to ${booking.customerEmail}.`;
+        document.getElementById("d-item").textContent = booking.itemTitle;
+        document.getElementById("d-amount").textContent =
+          new Intl.NumberFormat("en-US", { style: "currency", currency: booking.currency }).format(
+            booking.amountTotal / 100
+          ) + " · Booking #" + booking.id.slice(0, 8);
+        details.style.display = "block";
+        return;
+      }
+
+      if (attempt < 8) {
+        // Stripe webhook may take a moment to arrive — poll briefly.
+        setTimeout(() => poll(attempt + 1), 1500);
+      } else {
+        heading.textContent = "Payment received";
+        body.textContent = "We're finalizing your confirmation — check your email shortly.";
+      }
+    } catch (err) {
+      heading.textContent = "Payment received";
+      body.textContent = "We're finalizing your confirmation — check your email shortly.";
+    }
+  }
+
+  poll();
+</script>
+</body>
+</html>

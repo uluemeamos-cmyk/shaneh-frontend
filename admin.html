@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin — Shaneh No Limit Experience</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .admin-wrap { max-width: 980px; margin: 0 auto; padding: 40px 24px 80px; }
+  .summary-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 28px 0 36px; }
+  .summary-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; }
+  .summary-card b { font-family: var(--display); font-size: 1.6rem; display: block; }
+  .summary-card span { font-size: 0.78rem; color: var(--ink-soft); }
+  table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  th, td { text-align: left; padding: 12px 14px; font-size: 0.85rem; border-bottom: 1px solid var(--line); }
+  th { background: var(--sand-deep); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.05em; }
+  .status-pill { padding: 3px 9px; border-radius: 20px; font-size: 0.72rem; font-weight: 600; }
+  .status-paid { background: #dcecdf; color: #1F3A2E; }
+  .status-pending { background: #f3e6c8; color: #7A3B2E; }
+  .filters { display: flex; gap: 10px; margin-bottom: 18px; }
+  .filters button { border: 1px solid var(--line); background: #fff; padding: 8px 14px; border-radius: 20px; font-size: 0.82rem; cursor: pointer; }
+  .filters button.active { background: var(--ink); color: var(--sand); border-color: var(--ink); }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap nav">
+    <a href="/" class="logo">Shaneh <span>No Limit</span></a>
+  </div>
+</header>
+
+<div class="admin-wrap">
+  <span class="eyebrow">Internal</span>
+  <h1 style="margin-top:10px;">Bookings</h1>
+
+  <div class="summary-row" id="summary">
+    <div class="summary-card"><b>—</b><span>Total bookings</span></div>
+    <div class="summary-card"><b>—</b><span>Paid</span></div>
+    <div class="summary-card"><b>—</b><span>Pending</span></div>
+    <div class="summary-card"><b>—</b><span>Revenue</span></div>
+  </div>
+
+  <div class="filters">
+    <button data-filter="" class="active">All</button>
+    <button data-filter="paid">Paid</button>
+    <button data-filter="pending">Pending</button>
+  </div>
+
+  <div id="table-wrap">
+    <p class="loading">Loading bookings…</p>
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script>
+  // fetch() doesn't reliably trigger the browser's native Basic Auth
+  // dialog, so we ask for the admin password once and attach it as an
+  // Authorization header on every admin request.
+  let currentFilter = "";
+  const adminPassword = window.prompt("Admin password:") || "";
+  const authHeader = "Basic " + btoa(`admin:${adminPassword}`);
+
+  async function loadSummary() {
+    const res = await fetch(`${API_BASE_URL}/api/admin/summary`, {
+      headers: { Authorization: authHeader },
+    });
+    if (!res.ok) throw new Error("auth");
+    const s = await res.json();
+    const cards = document.querySelectorAll(".summary-card b");
+    cards[0].textContent = s.totalBookings;
+    cards[1].textContent = s.paidBookings;
+    cards[2].textContent = s.pendingBookings;
+    cards[3].textContent = new Intl.NumberFormat("en-US", { style: "currency", currency: "usd" }).format(s.revenue / 100);
+  }
+
+  async function loadBookings() {
+    const wrap = document.getElementById("table-wrap");
+    wrap.innerHTML = `<p class="loading">Loading bookings…</p>`;
+    const url = `${API_BASE_URL}/api/admin/bookings${currentFilter ? `?status=${currentFilter}` : ""}`;
+    const res = await fetch(url, { headers: { Authorization: authHeader } });
+    if (!res.ok) throw new Error("auth");
+    const bookings = await res.json();
+
+    if (!bookings.length) {
+      wrap.innerHTML = `<p class="empty-state">No bookings yet.</p>`;
+      return;
+    }
+
+    wrap.innerHTML = `
+      <table>
+        <thead>
+          <tr><th>Date</th><th>Type</th><th>Item</th><th>Customer</th><th>Amount</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          ${bookings.map(rowHTML).join("")}
+        </tbody>
+      </table>`;
+  }
+
+  function rowHTML(b) {
+    const amount = new Intl.NumberFormat("en-US", { style: "currency", currency: b.currency }).format(b.amountTotal / 100);
+    const date = new Date(b.createdAt).toLocaleDateString();
+    return `
+      <tr>
+        <td>${date}</td>
+        <td>${b.kind === "trip" ? "Trip" : "Car rental"}</td>
+        <td>${b.itemTitle}</td>
+        <td>${b.customerName}<br><span style="color:var(--ink-soft)">${b.customerEmail}</span></td>
+        <td>${amount}</td>
+        <td><span class="status-pill status-${b.status}">${b.status}</span></td>
+      </tr>`;
+  }
+
+  document.querySelectorAll(".filters button").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".filters button").forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      currentFilter = btn.getAttribute("data-filter");
+      loadBookings().catch(showAuthError);
+    });
+  });
+
+  function showAuthError() {
+    document.getElementById("table-wrap").innerHTML =
+      `<p class="empty-state">Couldn't load bookings — check ADMIN_PASSWORD is set on the backend and re-enter credentials.</p>`;
+  }
+
+  loadSummary().catch(showAuthError);
+  loadBookings().catch(showAuthError);
+</script>
+</body>
+</html>
