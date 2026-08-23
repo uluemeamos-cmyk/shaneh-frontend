@@ -20,8 +20,8 @@ html { scroll-behavior: smooth; }
 body {
   margin: 0;
   font-family: var(--body);
-  background: var(--sand);
-  color: var(--ink);
+  background: #000;
+  color: #f4f4f4;
   line-height: 1.6;
 }
 
@@ -299,7 +299,7 @@ footer.site-footer { border-top: 1px solid var(--line); padding: 40px 0; font-si
   content: "";
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.45);
+  background: rgba(0,0,0,0.6);
 }
 .hero-grid {
   position: relative;
@@ -314,9 +314,9 @@ footer.site-footer { border-top: 1px solid var(--line); padding: 40px 0; font-si
 .hero-logo-overlay {
   position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 280px;
+  right: 8%;
+  transform: translateY(-50%);
+  width: 220px;
   z-index: 2;
   pointer-events: none;
 }
