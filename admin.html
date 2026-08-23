@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Admin — Shaneh No Limit Experience</title>
-<link rel="stylesheet" href="style.css">  .admin-wrap { max-width: 980px; margin: 0 auto; padding: 40px 24px 80px; }
+<link rel="stylesheet" href="style.css">
+<style> .admin-wrap { max-width: 980px; margin: 0 auto; padding: 40px 24px 80px; }
   .summary-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 28px 0 36px; }
   .summary-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; }
   .summary-card b { font-family: var(--display); font-size: 1.6rem; display: block; }
@@ -49,8 +50,8 @@
   </div>
 </div>
 
-src="config.js"
-  // fetch() doesn't reliably trigger the browser's native Basic Auth
+<script src="config.js"></script>
+<script>  // fetch() doesn't reliably trigger the browser's native Basic Auth
   // dialog, so we ask for the admin password once and attach it as an
   // Authorization header on every admin request.
   let currentFilter = "";
