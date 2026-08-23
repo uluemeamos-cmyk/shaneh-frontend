@@ -311,3 +311,12 @@ footer.site-footer { border-top: 1px solid var(--line); padding: 40px 0; font-si
 .hero-grid .hero-coords {
   color: #fff;
 }
+.hero-logo-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 280px;
+  z-index: 2;
+  pointer-events: none;
+}
