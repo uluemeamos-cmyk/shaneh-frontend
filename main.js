@@ -71,12 +71,79 @@ function carCardHTML(car) {
     </div>`;
 }
 
+// ---------- Load & render hotels ----------
+async function loadHotels() {
+  const grid = document.getElementById("hotels-grid");
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/hotels`);
+    const hotels = await res.json();
+    if (!hotels.length) {
+      grid.innerHTML = `<div class="empty-state">No hotels available right now.</div>`;
+      return;
+    }
+    grid.innerHTML = hotels.map(hotelCardHTML).join("");
+  } catch (err) {
+    grid.innerHTML = `<div class="empty-state">Couldn't load hotels. Is the backend running? (${API_BASE_URL})</div>`;
+  }
+}
+
+function hotelCardHTML(hotel) {
+  return `
+    <div class="card">
+      <div class="card-media"><img src="${hotel.image}" alt="${hotel.name}" loading="lazy"><span class="tag">★ ${hotel.rating}</span></div>
+      <div class="card-body">
+        <h3>${hotel.name}</h3>
+        <p>${hotel.location} — ${hotel.description}</p>
+        <div class="card-price">
+          <b>${formatMoney(hotel.pricePerNight, hotel.currency)}</b>
+          <span>per night</span>
+        </div>
+        <button class="btn gold" data-book-hotel="${hotel.id}">Book &amp; Pay</button>
+      </div>
+    </div>`;
+}
+
+// ---------- Load & render airport pickups ----------
+async function loadPickups() {
+  const grid = document.getElementById("pickups-grid");
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/airport-pickups`);
+    const pickups = await res.json();
+    if (!pickups.length) {
+      grid.innerHTML = `<div class="empty-state">No transfers available right now.</div>`;
+      return;
+    }
+    grid.innerHTML = pickups.map(pickupCardHTML).join("");
+  } catch (err) {
+    grid.innerHTML = `<div class="empty-state">Couldn't load transfers. Is the backend running? (${API_BASE_URL})</div>`;
+  }
+}
+
+function pickupCardHTML(pickup) {
+  return `
+    <div class="card">
+      <div class="card-media"><img src="${pickup.image}" alt="${pickup.name}" loading="lazy"><span class="tag">${pickup.seats} seats</span></div>
+      <div class="card-body">
+        <h3>${pickup.name}</h3>
+        <p>${pickup.description}</p>
+        <div class="card-price">
+          <b>${formatMoney(pickup.price, pickup.currency)}</b>
+          <span>per transfer</span>
+        </div>
+        <button class="btn gold" data-book-pickup="${pickup.id}">Book &amp; Pay</button>
+      </div>
+    </div>`;
+}
+
 // ---------- Booking modal ----------
 const overlay = document.getElementById("modal-overlay");
 const modalTitle = document.getElementById("modal-title");
 const modalSub = document.getElementById("modal-sub");
 const tripFields = document.getElementById("trip-fields");
 const carFields = document.getElementById("car-fields");
+const hotelFields = document.getElementById("hotel-fields");
+const pickupFields = document.getElementById("pickup-fields");
+const allFieldGroups = [tripFields, carFields, hotelFields, pickupFields];
 const totalEl = document.getElementById("modal-total-amount");
 const form = document.getElementById("booking-form");
 const errorEl = document.getElementById("modal-error");
@@ -86,6 +153,8 @@ let currentItem = null; // { kind: 'trip'|'car-rental', data: {...} }
 
 let tripsCache = [];
 let carsCache = [];
+let hotelsCache = [];
+let pickupsCache = [];
 
 async function ensureCaches() {
   if (!tripsCache.length) {
@@ -93,6 +162,12 @@ async function ensureCaches() {
   }
   if (!carsCache.length) {
     carsCache = await fetch(`${API_BASE_URL}/api/car-rentals`).then((r) => r.json()).catch(() => []);
+  }
+  if (!hotelsCache.length) {
+    hotelsCache = await fetch(`${API_BASE_URL}/api/hotels`).then((r) => r.json()).catch(() => []);
+  }
+  if (!pickupsCache.length) {
+    pickupsCache = await fetch(`${API_BASE_URL}/api/airport-pickups`).then((r) => r.json()).catch(() => []);
   }
 }
 
@@ -118,16 +193,26 @@ function recalcTotal() {
     const children = Math.max(0, parseInt(document.getElementById("f-children").value, 10) || 0);
     const total = currentItem.data.pricePerAdult * adults + currentItem.data.pricePerChild * children;
     totalEl.textContent = formatMoney(total, currentItem.data.currency);
-  } else {
+  } else if (currentItem.kind === "car-rental") {
     const days = Math.max(1, parseInt(document.getElementById("f-days").value, 10) || 1);
     const total = currentItem.data.pricePerDay * days;
     totalEl.textContent = formatMoney(total, currentItem.data.currency);
+  } else if (currentItem.kind === "hotel") {
+    const nights = Math.max(1, parseInt(document.getElementById("f-nights").value, 10) || 1);
+    const total = currentItem.data.pricePerNight * nights;
+    totalEl.textContent = formatMoney(total, currentItem.data.currency);
+  } else if (currentItem.kind === "airport-pickup") {
+    totalEl.textContent = formatMoney(currentItem.data.price, currentItem.data.currency);
   }
 }
 
-["f-adults", "f-children", "f-days"].forEach((id) => {
+["f-adults", "f-children", "f-days", "f-nights"].forEach((id) => {
   document.getElementById(id).addEventListener("input", recalcTotal);
 });
+
+function hideAllFieldGroups() {
+  allFieldGroups.forEach((el) => (el.style.display = "none"));
+}
 
 async function openTripModal(tripId) {
   await ensureCaches();
@@ -136,8 +221,8 @@ async function openTripModal(tripId) {
   currentItem = { kind: "trip", data: trip };
   modalTitle.textContent = trip.title;
   modalSub.textContent = `${trip.durationDays}-day trip package`;
+  hideAllFieldGroups();
   tripFields.style.display = "block";
-  carFields.style.display = "none";
   document.getElementById("f-adults").value = 1;
   document.getElementById("f-children").value = 0;
   recalcTotal();
@@ -151,9 +236,36 @@ async function openCarModal(carId) {
   currentItem = { kind: "car-rental", data: car };
   modalTitle.textContent = car.name;
   modalSub.textContent = `${car.seats}-seat rental car`;
-  tripFields.style.display = "none";
+  hideAllFieldGroups();
   carFields.style.display = "block";
   document.getElementById("f-days").value = 1;
+  recalcTotal();
+  openModal();
+}
+
+async function openHotelModal(hotelId) {
+  await ensureCaches();
+  const hotel = hotelsCache.find((h) => h.id === hotelId);
+  if (!hotel) return;
+  currentItem = { kind: "hotel", data: hotel };
+  modalTitle.textContent = hotel.name;
+  modalSub.textContent = hotel.location;
+  hideAllFieldGroups();
+  hotelFields.style.display = "block";
+  document.getElementById("f-nights").value = 1;
+  recalcTotal();
+  openModal();
+}
+
+async function openPickupModal(pickupId) {
+  await ensureCaches();
+  const pickup = pickupsCache.find((p) => p.id === pickupId);
+  if (!pickup) return;
+  currentItem = { kind: "airport-pickup", data: pickup };
+  modalTitle.textContent = pickup.name;
+  modalSub.textContent = "Airport transfer";
+  hideAllFieldGroups();
+  pickupFields.style.display = "block";
   recalcTotal();
   openModal();
 }
@@ -161,8 +273,12 @@ async function openCarModal(carId) {
 document.addEventListener("click", (e) => {
   const tripBtn = e.target.closest("[data-book-trip]");
   const carBtn = e.target.closest("[data-book-car]");
+  const hotelBtn = e.target.closest("[data-book-hotel]");
+  const pickupBtn = e.target.closest("[data-book-pickup]");
   if (tripBtn) openTripModal(tripBtn.getAttribute("data-book-trip"));
   if (carBtn) openCarModal(carBtn.getAttribute("data-book-car"));
+  if (hotelBtn) openHotelModal(hotelBtn.getAttribute("data-book-hotel"));
+  if (pickupBtn) openPickupModal(pickupBtn.getAttribute("data-book-pickup"));
 });
 
 form.addEventListener("submit", async (e) => {
@@ -189,12 +305,32 @@ form.addEventListener("submit", async (e) => {
         customerEmail,
         customerPhone,
       };
-    } else {
+    } else if (currentItem.kind === "car-rental") {
       endpoint = "/api/checkout/car-rental";
       payload = {
         carId: currentItem.data.id,
         days: document.getElementById("f-days").value,
         pickupDate: document.getElementById("f-pickup-date").value,
+        customerName,
+        customerEmail,
+        customerPhone,
+      };
+    } else if (currentItem.kind === "hotel") {
+      endpoint = "/api/checkout/hotel";
+      payload = {
+        hotelId: currentItem.data.id,
+        nights: document.getElementById("f-nights").value,
+        checkInDate: document.getElementById("f-checkin-date").value,
+        customerName,
+        customerEmail,
+        customerPhone,
+      };
+    } else if (currentItem.kind === "airport-pickup") {
+      endpoint = "/api/checkout/airport-pickup";
+      payload = {
+        pickupId: currentItem.data.id,
+        arrivalDate: document.getElementById("f-arrival-date").value,
+        flightNumber: document.getElementById("f-flight-number").value,
         customerName,
         customerEmail,
         customerPhone,
@@ -239,3 +375,5 @@ document.getElementById("quick-search").addEventListener("submit", (e) => {
 
 loadTrips();
 loadCars();
+loadHotels();
+loadPickups();
