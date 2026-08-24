@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,27 +7,29 @@
 <title>Shaneh No Limit Experience — Vacation With No Limit</title>
 <meta name="description" content="Bespoke tours, trip planning, and car rentals with Shaneh No Limit Experience.">
 <link rel="stylesheet" href="style.css"></head>
-<body>
-
+<body><!-- refresh -->
 <header class="site-header">
   <div class="wrap nav">
-    <div class="logo">Shaneh <span>No Limit</span></div>
-    <ul class="nav-links">
-      <li><a href="#">Home</a></li>
+   <div class="logo"><img src="shanehmedia.png" alt="Shaneh No Limit" style="height:40px;vertical-align:middle;"> Shaneh <span>No Limit</span></div>
+   <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#services">Services</a></li>
       <li><a href="#trips">Trip Planning</a></li>
       <li><a href="#car-rentals">Car Rentals</a></li>
+      <li><a href="#hotels">Hotel Reservations</a></li>
+      <li><a href="#pickups">Airport Pickup</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
 </header>
 
-<section class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <span class="eyebrow">Award-winning tour operator</span>
-      <h1>Vacation with no limit</h1>
+
+ <section class="hero">
+<div class="hero-rotator" id="heroRotator"></div>
+<img src="shanehlogo-transparent.png" class="hero-logo-overlay" alt="Shaneh No Limit Experience">
+<div class="wrap hero-grid">
+<div>
+<span class="eyebrow">Award-winning tour operator</span>      <h1>Vacation with no limit</h1>
       <p class="lede">Bespoke tours, trip planning, and car rentals — crafted around your itinerary, not a template. Book online, pay securely, and go.</p>
       <div class="hero-coords">4.9 rating · 2,500+ reviews</div>
       <div style="margin-top:26px; display:flex; gap:14px;">
@@ -34,15 +37,7 @@
         <a href="#car-rentals" class="btn outline">Rent a car</a>
       </div>
     </div>
-    <div class="hero-art" aria-hidden="true">
-      <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice">
-        <circle cx="320" cy="90" r="46" fill="#FBF4E6" opacity="0.9"/>
-        <path d="M0 320 Q 100 260 200 300 T 400 290 V500 H0 Z" fill="#1F3A2E" opacity="0.55"/>
-        <path d="M0 380 Q 120 330 220 360 T 400 350 V500 H0 Z" fill="#152A20" opacity="0.7"/>
-      </svg>
-    </div>
   </div>
-
   <div class="wrap">
     <form class="search-bar" id="quick-search">
       <div>
@@ -105,7 +100,7 @@
     </div>
     <div class="grid-3">
       <div class="card">
-        <div class="card-media"><span class="tag">Rentals</span></div>
+<div class="card-media"><img src="shanehmedia10.jpg" alt="Car Rentals"><span class="tag">Rentals</span></div>
         <div class="card-body">
           <h3>Car Rentals</h3>
           <p>Economy to luxury, booked and paid for online in minutes.</p>
@@ -113,16 +108,15 @@
         </div>
       </div>
       <div class="card">
-        <div class="card-media"><span class="tag">Transfers</span></div>
+        <div class="card-media"><img src="shanehmedia9.jpg" alt="Airport Pick Up"><span class="tag">Transfers</span></div>
         <div class="card-body">
           <h3>Airport Pick Up</h3>
           <p>Smooth arrivals with a driver waiting at the gate.</p>
-          <a href="#contact" class="btn outline">Enquire</a>
+          <a href="#pickups" class="btn outline">Book a transfer</a>
         </div>
       </div>
       <div class="card">
-        <div class="card-media"><span class="tag">Planning</span></div>
-        <div class="card-body">
+        <div class="card-media"><img src="shanehmedia8.jpg" alt="Trip Planning"><span class="tag">Planning</span></div>        <div class="card-body">
           <h3>Trip Planning</h3>
           <p>Bespoke itineraries tailored to your pace and interests.</p>
           <a href="#trips" class="btn outline">See trips</a>
@@ -154,6 +148,34 @@
     </div>
     <div class="grid-4" id="cars-grid">
       <div class="loading">Loading cars…</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="hotels">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Hotel reservations</span>
+      <h2>Stay somewhere worth remembering</h2>
+    </div>
+    <div class="grid-3" id="hotels-grid">
+      <div class="loading">Loading hotels…</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="pickups">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Airport pickup</span>
+      <h2>A smooth start to every trip</h2>
+    </div>
+    <div class="grid-3" id="pickups-grid">
+      <div class="loading">Loading transfers…</div>
     </div>
   </div>
 </section>
@@ -200,11 +222,11 @@
 
 <footer class="site-footer">
   <div class="wrap footer-grid">
-    <div>© 2026 Shaneh No Limit Experience. All rights reserved.</div>
+    <div>©️ 2026 Shaneh No Limit Experience. All rights reserved.</div>
     <ul>
       <li><a href="#services">Tourism Agency</a></li>
       <li><a href="#car-rentals">Car Rental</a></li>
-      <li><a href="#services">Airport Pick Up</a></li>
+      <li><a href="#pickups">Airport Pick Up</a></li>
       <li><a href="#trips">Trip Planning</a></li>
       <li><a href="#">Terms &amp; Conditions</a></li>
       <li><a href="admin.html">Admin</a></li>
@@ -212,7 +234,7 @@
   </div>
 </footer>
 
-<!-- Booking modal (shared for trips + car rentals) -->
+<!-- Booking modal (shared for trips + car rentals + hotels + pickups) -->
 <div class="modal-overlay" id="modal-overlay">
   <div class="modal">
     <button class="modal-close" id="modal-close" aria-label="Close">×</button>
@@ -248,6 +270,28 @@
         </div>
       </div>
 
+      <div id="hotel-fields" style="display:none;">
+        <div class="field">
+          <label for="f-nights">Number of nights</label>
+          <input type="number" id="f-nights" min="1" value="1">
+        </div>
+        <div class="field">
+          <label for="f-checkin-date">Check-in date</label>
+          <input type="date" id="f-checkin-date">
+        </div>
+      </div>
+
+      <div id="pickup-fields" style="display:none;">
+        <div class="field">
+          <label for="f-arrival-date">Arrival date</label>
+          <input type="date" id="f-arrival-date">
+        </div>
+        <div class="field">
+          <label for="f-flight-number">Flight number</label>
+          <input type="text" id="f-flight-number" placeholder="e.g. BA249">
+        </div>
+      </div>
+
       <div class="field">
         <label for="f-name">Full name</label>
         <input type="text" id="f-name" required>
@@ -271,6 +315,17 @@
     </form>
   </div>
 </div>
-
-<script src="config.js"></script><script src="js/main.js"></script>
-<script src="main.js"></script></html>
+<script src="config.js"></script>
+  <script src="main.js"></script>
+  <script>
+  const heroImages = ["banner.jpg", "banner-1-1-bg.jpg", "banner2.jpg", "banner4.jpg"];
+  let heroIndex = 0;
+  const heroEl = document.getElementById("heroRotator");
+  function rotateHero() {
+    heroEl.style.backgroundImage = `url(${heroImages[heroIndex]})`;
+    heroIndex = (heroIndex + 1) % heroImages.length;
+  }
+  rotateHero();
+  setInterval(rotateHero, 5000);
+</script></body>
+</html>
