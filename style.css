@@ -151,7 +151,7 @@ header.site-header {
 
 /* ---------- Search / booking bar ---------- */
 .search-bar {
-  margin-top: -34px;
+  margin-top: 25px;
   position: relative;
   z-index: 5;
   background: var(--ink);
