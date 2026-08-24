@@ -192,7 +192,7 @@ section { padding: 90px 0; }
 .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 
 .card {
-  background: #fff;
+  background: rgba(0,0,0,0.55);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   overflow: hidden;
@@ -208,12 +208,11 @@ section { padding: 90px 0; }
   padding: 4px 9px; border-radius: 20px; font-weight: 600;
 }
 .card-body { padding: 18px 18px 20px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
-.card-body h3 { font-size: 1.1rem; }
-.card-body p { font-size: 0.88rem; color: var(--ink-soft); margin: 0; flex: 1; }
-.card-price { display: flex; align-items: baseline; justify-content: space-between; margin-top: 6px; }
-.card-price b { font-family: var(--display); font-size: 1.25rem; }
-.card-price span { font-size: 0.75rem; color: var(--ink-soft); }
-.card-body .btn { justify-content: center; width: 100%; }
+.card-body h3 { font-size: 1.1rem; color: #fff; }
+.card-body p { font-size: 0.88rem; color: rgba(255,255,255,0.85); margin: 0; flex: 1; }.card-body p { font-size: 0.88rem; color: var(--ink-soft); margin: 0; flex: 1; }
+.card-body { padding: 18px 18px 20px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.card-body h3 { font-size: 1.1rem; color: #fff; }
+.card-body p { font-size: 0.88rem; color: rgba(255,255,255,0.85); margin: 0; flex: 1; }.card-body .btn { justify-content: center; width: 100%; }
 
 .loading, .empty-state { color: var(--ink-soft); font-size: 0.9rem; padding: 20px 0; }
 
