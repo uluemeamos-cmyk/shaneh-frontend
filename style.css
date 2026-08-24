@@ -218,8 +218,10 @@ section { padding: 90px 0; }
 
 /* ---------- Testimonials ---------- */
 .testi { background: var(--sand-deep); border-radius: var(--radius); padding: 28px; border: 1px solid var(--line); }
-.testi p { font-style: italic; }
-.testi footer { margin-top: 14px; font-size: 0.85rem; font-weight: 600; font-style: normal; }
+.testi p {
+  font-style: italic;
+  color: var(--ink);
+}.testi footer { margin-top: 14px; font-size: 0.85rem; font-weight: 600; font-style: normal; }
 
 /* ---------- Contact / footer ---------- */
 .contact-band { background: var(--ink); color: var(--sand); border-radius: var(--radius); padding: 48px; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
