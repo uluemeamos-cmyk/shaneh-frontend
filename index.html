@@ -11,7 +11,7 @@
 <header class="site-header">
   <div class="wrap nav">
    <div class="logo"><img src="shanehmedia.png" alt="Shaneh No Limit" style="height:40px;vertical-align:middle;"> Shaneh <span>No Limit</span></div>
-   <ul class="nav-links">
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>    <ul class="nav-links" id="navLinks">
       <li><a href="#about">About</a></li>
       <li><a href="#services">Services</a></li>
       <li><a href="#trips">Trip Planning</a></li>
@@ -329,3 +329,8 @@
   setInterval(rotateHero, 5000);
 </script></body>
 </html>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+</script>
