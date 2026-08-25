@@ -389,16 +389,4 @@ footer.site-footer { border-top: 1px solid var(--line); padding: 40px 0; font-si
   .nav-links.open { display: flex; }
   .nav-links.open a { color: var(--ink); }
 
-  .hero { padding: 70px 0 40px; }
-  .hero-logo-overlay { width: 130px; top: 22%; }
-
-  .search-bar > div:last-child { grid-column: 1 / -1; }
-}
-
-@media (max-width: 560px) {
-  .hero-logo-overlay { width: 100px; top: 20%; }
-  .search-bar { grid-template-columns: 1fr; }
-  .stat-row { flex-wrap: wrap; gap: 24px; }
-  .contact-band { padding: 28px; }
-  .modal { padding: 22px; }
-}
+  .hero-logo-overlay { width: 100px; top: 4%; }
