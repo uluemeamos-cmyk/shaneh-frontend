@@ -390,3 +390,11 @@ footer.site-footer { border-top: 1px solid var(--line); padding: 40px 0; font-si
   .nav-links.open a { color: var(--ink); }
 
   .hero-logo-overlay { width: 100px; top: 4%; }
+.hero-logo-overlay {
+  width: 70px !important;
+  top: 20px !important;
+  left: auto !important;
+  right: 20px !important;
+  bottom: auto !important;
+  transform: none !important;
+}
