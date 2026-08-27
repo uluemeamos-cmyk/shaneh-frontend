@@ -354,18 +354,16 @@
 </div>
 <script src="config.js"></script>
   <script src="main.js"></script>
-  <script>
-  const heroImages = ["banner.jpg", "banner-1-1-bg.jpg", "banner2.jpg", "banner4.jpg"];
-  let heroIndex = 0;
-  const heroEl = document.getElementById("heroRotator");
-  function rotateHero() {
-    heroEl.style.backgroundImage = `url(${heroImages[heroIndex]})`;
-    heroIndex = (heroIndex + 1) % heroImages.length;
+ <script>
+  const slides = document.querySelectorAll('.hero-slide');
+  let slideIndex = 0;
+  function showNextSlide() {
+    slides[slideIndex].classList.remove('active');
+    slideIndex = (slideIndex + 1) % slides.length;
+    slides[slideIndex].classList.add('active');
   }
-  rotateHero();
-  setInterval(rotateHero, 5000);
-</script>
-<script>document.getElementById('navToggle').addEventListener('click', function () {
+  setInterval(showNextSlide, 4500);
+</script><script>document.getElementById('navToggle').addEventListener('click', function () {
   document.getElementById('navLinks').classList.toggle('open');
 });
 </script></body></html>
