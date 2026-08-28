@@ -397,6 +397,7 @@ footer.site-footer { border-top: 1px solid var(--line); padding: 40px 0; font-si
   right: 20px !important;
   bottom: auto !important;
   transform: none !important;
+}
   .hero-slides {
   position: relative;
   width: 100%;
