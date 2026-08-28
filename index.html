@@ -80,11 +80,43 @@
 
   <div class="wrap">
     <form class="search-bar" id="quick-search">
+      <div>
+        <label for="qs-type">Type</label>
+        <select id="qs-type">
+          <option value="">Any</option>
+          <option value="Site Seeing">Site Seeing</option>
+          <option value="Wild Life">Wild Life</option>
+          <option value="Adventure">Adventure</option>
+        </select>
+      </div>
+      <div>
+        <label for="qs-adults">Adults</label>
+        <select id="qs-adults">
+          <option>1 Adult</option><option>2 Adults</option><option>3 Adults</option><option>4 Adults</option><option>Group</option>
+        </select>
+      </div>
+      <div>
+        <label for="qs-children">Children</label>
+        <select id="qs-children">
+          <option>0 Children</option><option>1 Child</option><option>2 Children</option><option>3 Children</option>
+        </select>
+      </div>
+      <div>
+        <label for="qs-date">Travel date</label>
+        <input type="date" id="qs-date">
+      </div>
+      <div style="align-self:end;">
+        <button type="submit" class="btn gold" style="width:100%;">Check now</button>
+      </div>
+    </form>
+  </div>
+</section>
+
 <section id="about">
   <div class="wrap about-grid">
     <div>
       <span class="eyebrow">Welcome to Shaneh</span>
-      <h2>Where adventure knows no boundaries</h2>
+      <h2>Experience Cape Town with no limit</h2>
       <p style="margin-top:16px; color:var(--ink-soft);">We craft unforgettable journeys that immerse travelers in the culture, landscapes, and hidden corners of the world — from adrenaline-pumping adventures to serene escapes and indulgent luxury retreats.</p>
       <div class="stat-row">
         <div class="stat"><b>4.9</b><span>Average rating</span></div>
@@ -324,21 +356,12 @@
   </div>
 </div>
 <script src="config.js"></script>
-  <script src="main.js"></script>
-  <script>
-  const heroImages = ["banner.jpg", "banner-1-1-bg.jpg", "banner2.jpg", "banner4.jpg"];
-  let heroIndex = 0;
-  const heroEl = document.getElementById("heroRotator");
-  function rotateHero() {
-    heroEl.style.backgroundImage = `url(${heroImages[heroIndex]})`;
-    heroIndex = (heroIndex + 1) % heroImages.length;
-  }
-  rotateHero();
-  setInterval(rotateHero, 5000);
-</script>
-<script>document.getElementById('navToggle').addEventListener('click', function () {
+<script src="main.js"></script>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
   document.getElementById('navLinks').classList.toggle('open');
 });
+</script>
 <script>
   const slides = document.querySelectorAll('.hero-slide');
   let slideIndex = 0;
@@ -349,5 +372,5 @@
   }
   setInterval(showNextSlide, 4500);
 </script>
-
-</script></body></html>
+</body>
+</html>
