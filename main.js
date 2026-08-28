@@ -24,7 +24,17 @@ async function loadTrips() {
 }
 
 function tripCardHTML(trip) {
-  return `
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    document.querySelectorAll('.card-body h3').forEach(function(h3) {
+      if (h3.textContent.trim() === 'Extreme Experiences: Thrills Await') {
+        const img = h3.closest('.card').querySelector('.card-media img');
+        if (img) img.src = 'skydive2.jpg';
+      }
+    });
+  }, 1500);
+});  
+  `
     <div class="card">
       <div class="card-media"><img src="${trip.image}" alt="${trip.title}" loading="lazy"><span class="tag">${trip.type}</span></div>
       <div class="card-body">
