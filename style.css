@@ -1,345 +1,378 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Shaneh No Limit Experience — Vacation With No Limit</title>
+<meta name="description" content="Bespoke tours, trip planning, and car rentals with Shaneh No Limit Experience.">
+<link rel="stylesheet" href="style.css"></head>
+<body><!-- refresh -->
+<header class="site-header">
+  <div class="wrap nav">
+   <div class="logo"><img src="shanehmedia.png" alt="Shaneh No Limit" style="height:40px;vertical-align:middle;"> Shaneh <span>No Limit</span></div>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#trips">Trip Planning</a></li>
+      <li><a href="#car-rentals">Car Rentals</a></li>
+      <li><a href="#hotels">Hotel Reservations</a></li>
+      <li><a href="#pickups">Airport Pickup</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
 
-:root {
-  --ink: #1F3A2E;
-  --ink-soft: #f4f4f4;
-  --sand: #FBF4E6;
-  --sand-deep: #F0E4CC;
-  --gold: #C98A2B;
-  --rust: #7A3B2E;
-  --line: rgba(31, 58, 46, 0.18);
-  --display: 'Fraunces', serif;
-  --body: 'Work Sans', sans-serif;
-  --radius: 4px;
-}
 
-* { box-sizing: border-box; }
+<section class="hero">
+  <div class="hero-slides">
+    <div class="hero-slide active" style="background-image:url('skydive2.jpg')">
+      <div class="hero-slide-inner">
+        <span class="eyebrow">No limit experience</span>
+        <h1>Extreme Experiences: Thrills Await</h1>
+        <p class="lede">For adrenaline junkies: skydiving, bungee jumping, and heart-pounding excitement across handpicked destinations.</p>
+      </div>
+    </div>
 
-html { scroll-behavior: smooth; }
+    <div class="hero-slide" style="background-image:url('banner-1-1-bg.jpg')">
+      <div class="hero-slide-inner">
+        <span class="eyebrow">Award-winning tour operator</span>
+        <h1>Vacation with no limit</h1>
+        <p class="lede">Bespoke tours, trip planning, and car rentals — crafted around your itinerary, not a template. Book online, pay securely, and go.</p>
+        <div class="hero-coords">4.9 rating · 2,500+ reviews</div>
+        <div style="margin-top:26px; display:flex; gap:14px;">
+          <a href="#trips" class="btn gold">Plan a trip</a>
+          <a href="#car-rentals" class="btn outline">Rent a car</a>
+        </div>
+      </div>
+    </div>
 
-body {
-  margin: 0;
-  font-family: var(--body);
-  background: #000;
-  color: #f4f4f4;
-  line-height: 1.6;
-}
+    <div class="hero-slide" style="background-image:url('anoof-junaid-J16ep2LfHwY-unsplash.jpg')">
+      <div class="hero-slide-inner">
+        <span class="eyebrow">No limit experience</span>
+        <h1>Adventure with no limit</h1>
+        <p class="lede">Bungee jumps, freefall drops, adrenaline you choose — no boundaries, ever.</p>
+        <div style="margin-top:26px;">
+          <a href="#adventure-exp" class="btn gold">Plan your adventure</a>
+        </div>
+      </div>
+    </div>
 
-img { max-width: 100%; display: block; }
-a { color: inherit; text-decoration: none; }
+    <div class="hero-slide" style="background-image:url('istock.png')">
+      <div class="hero-slide-inner">
+        <span class="eyebrow">No limit experience</span>
+        <h1>Romance with no limit</h1>
+        <p class="lede">Private moments, crafted exactly your way — because love shouldn't have a template either.</p>
+        <div style="margin-top:26px;">
+          <a href="#romance-exp" class="btn gold">Plan your escape</a>
+        </div>
+      </div>
+    </div>
 
-.wrap {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
+    <div class="hero-slide" style="background-image:url('muzammil-soorma-R11bppS4q8o-unsplash.jpg')">
+      <div class="hero-slide-inner">
+        <span class="eyebrow">No limit experience</span>
+        <h1>However you want it — no limit</h1>
+        <p class="lede">Your version of no limit, your way. Tell us what it looks like and we'll build it.</p>
+        <div style="margin-top:26px;">
+          <a href="#trips" class="btn gold">Start planning</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
-.eyebrow {
-  font-family: var(--body);
-  font-size: 0.72rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--gold);
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-}
-.eyebrow::before {
-  content: '';
-  width: 22px;
-  height: 1px;
-  background: var(--gold);
-  display: inline-block;
-}
+  <div class="wrap">
+    <form class="search-bar" id="quick-search">
+      <div>
+        <label for="qs-type">Type</label>
+        <select id="qs-type">
+          <option value="">Any</option>
+          <option value="Site Seeing">Site Seeing</option>
+          <option value="Wild Life">Wild Life</option>
+          <option value="Adventure">Adventure</option>
+        </select>
+      </div>
+      <div>
+        <label for="qs-adults">Adults</label>
+        <select id="qs-adults">
+          <option>1 Adult</option><option>2 Adults</option><option>3 Adults</option><option>4 Adults</option><option>Group</option>
+        </select>
+      </div>
+      <div>
+        <label for="qs-children">Children</label>
+        <select id="qs-children">
+          <option>0 Children</option><option>1 Child</option><option>2 Children</option><option>3 Children</option>
+        </select>
+      </div>
+      <div>
+        <label for="qs-date">Travel date</label>
+        <input type="date" id="qs-date">
+      </div>
+      <div style="align-self:end;">
+        <button type="submit" class="btn gold" style="width:100%;">Check now</button>
+      </div>
+    </form>
+  </div>
+</section>
 
-h1, h2, h3, h4 { font-family: var(--display); font-weight: 600; margin: 0; line-height: 1.1; }
+<section id="about">
+  <div class="wrap about-grid">
+    <div>
+      <span class="eyebrow">Welcome to Shaneh</span>
+      <h2>Experience Cape Town with no limit</h2>
+      <p style="margin-top:16px; color:var(--ink-soft);">We craft unforgettable journeys that immerse travelers in the culture, landscapes, and hidden corners of the world — from adrenaline-pumping adventures to serene escapes and indulgent luxury retreats.</p>
+      <div class="stat-row">
+        <div class="stat"><b>4.9</b><span>Average rating</span></div>
+        <div class="stat"><b>2,500+</b><span>Reviews</span></div>
+        <div class="stat"><b>60+</b><span>Destinations</span></div>
+      </div>
+    </div>
+    <div>
+      <p style="color:var(--ink-soft);">What sets us apart is going beyond the ordinary: off-the-beaten-path destinations, exclusive access to hidden gems, and itineraries built entirely around you — then handled online, from quote to payment.</p>
+    </div>
+  </div>
+</section>
 
-/* ---------- Header — floats transparently over the hero image ---------- */
-header.site-header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 50;
-  background: transparent;
-  border-bottom: none;
-}
-.nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 0;
-}
-.logo {
-  font-family: var(--display);
-  font-size: 1.3rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  color: #fff;
-}
-.logo span { color: var(--gold); }
-.nav-links {
-  display: flex;
-  gap: 32px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  font-size: 0.92rem;
-  font-weight: 500;
-}
-.nav-links a { padding-bottom: 4px; border-bottom: 1px solid transparent; color: #fff; }
-.nav-links a:hover { border-color: var(--gold); }
+<hr class="divider">
 
-/* ---------- Hero (self-contained, images dissolve only here) ---------- */
-.hero {
-  position: relative;
-  overflow: hidden;
-}
-.hero-slides {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-  overflow: hidden;
-}
-.hero-slide {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  opacity: 0;
-  transition: opacity 1.8s ease-in-out;
-  display: flex;
-  align-items: center;
-  z-index: 0;
-}
-.hero-slide.active {
-  opacity: 1;
-  z-index: 1;
-}
-.hero-slide-inner {
-  position: relative;
-  z-index: 1;
-  padding: 60px;
-  padding-top: 140px;
-  max-width: 640px;
-  color: #fff;
-  opacity: 0;
-  transition: opacity 1.8s ease-in-out 0.4s;
-}
-.hero-slide.active .hero-slide-inner {
-  opacity: 1;
-}
-.hero-slide-inner h1 {
-  font-size: clamp(2.2rem, 5vw, 4rem);
-  margin: 14px 0 16px;
-  color: #fff;
-  text-shadow: 0 2px 12px rgba(0,0,0,0.5);
-}
-.hero-slide-inner .lede {
-  font-size: 1.05rem;
-  color: rgba(255,255,255,0.92);
-  max-width: 46ch;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
-}
-.hero-slide-inner .eyebrow,
-.hero-slide-inner .hero-coords {
-  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
-}
+<section id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Discover</span>
+      <h2>Services built around your trip</h2>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+<div class="card-media"><img src="shanehmedia10.jpg" alt="Car Rentals"><span class="tag">Rentals</span></div>
+        <div class="card-body">
+          <h3>Car Rentals</h3>
+          <p>Economy to luxury, booked and paid for online in minutes.</p>
+          <a href="#car-rentals" class="btn outline">Browse cars</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-media"><img src="shanehmedia9.jpg" alt="Airport Pick Up"><span class="tag">Transfers</span></div>
+        <div class="card-body">
+          <h3>Airport Pick Up</h3>
+          <p>Smooth arrivals with a driver waiting at the gate.</p>
+          <a href="#pickups" class="btn outline">Book a transfer</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-media"><img src="shanehmedia8.jpg" alt="Trip Planning"><span class="tag">Planning</span></div>        <div class="card-body">
+          <h3>Trip Planning</h3>
+          <p>Bespoke itineraries tailored to your pace and interests.</p>
+          <a href="#trips" class="btn outline">See trips</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-.hero-logo-overlay {
-  position: absolute;
-  top: 10%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 220px;
-  z-index: 2;
-  pointer-events: none;
-}
+<section id="trips">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Trip planning</span>
+      <h2>Handpicked trip packages</h2>
+    </div>
+    <div class="grid-3" id="trips-grid">
+      <div class="loading">Loading trips…</div>
+    </div>
+  </div>
+</section>
 
-.hero p.lede { font-size: 1.08rem; max-width: 46ch; color: var(--ink-soft); }
-.hero-coords {
-  font-family: var(--body);
-  font-size: 0.75rem;
-  letter-spacing: 0.06em;
-  color: var(--rust);
-  margin-top: 22px;
-}
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  border: 1px solid var(--ink);
-  background: var(--ink);
-  color: var(--sand);
-  padding: 13px 26px;
-  border-radius: var(--radius);
-  font-weight: 600;
-  font-size: 0.92rem;
-  cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
-}
-.btn:hover { transform: translateY(-1px); }
-.btn.outline { background: transparent; color: var(--ink); }
-.btn.gold { background: var(--gold); border-color: var(--gold); color: #211004; }
+<hr class="divider">
 
-/* ---------- Search / booking bar ---------- */
-.search-bar {
-  margin-top: 25px;
-  position: relative;
-  z-index: 5;
-  background: var(--ink);
-  border-radius: var(--radius);
-  padding: 22px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr) auto;
-  gap: 14px;
-  color: var(--sand);
-}
-.search-bar label { display: block; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.75; margin-bottom: 6px; }
-.search-bar select, .search-bar input {
-  width: 100%;
-  background: rgba(251,244,230,0.08);
-  border: 1px solid rgba(251,244,230,0.25);
-  color: var(--sand);
-  padding: 10px;
-  border-radius: 3px;
-  font-family: var(--body);
-  font-size: 0.9rem;
-}
-.search-bar select option { color: #111; }
+<section id="car-rentals">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Car rentals</span>
+      <h2>A car for every itinerary</h2>
+    </div>
+    <div class="grid-4" id="cars-grid">
+      <div class="loading">Loading cars…</div>
+    </div>
+  </div>
+</section>
 
-/* ---------- Sections ---------- */
-section { padding: 90px 0; }
-.section-head { max-width: 640px; margin-bottom: 48px; }
-.section-head h2 { font-size: clamp(1.9rem, 3vw, 2.6rem); margin-top: 14px; }
+<hr class="divider">
 
-.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
-.stat-row { display: flex; gap: 40px; margin-top: 32px; }
-.stat b { font-family: var(--display); font-size: 2.1rem; display: block; color: var(--gold); }
-.stat span { font-size: 0.82rem; color: var(--ink-soft); }
+<section id="hotels">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Hotel reservations</span>
+      <h2>Stay somewhere worth remembering</h2>
+    </div>
+    <div class="grid-3" id="hotels-grid">
+      <div class="loading">Loading hotels…</div>
+    </div>
+  </div>
+</section>
 
-.divider { border: none; border-top: 1px solid var(--line); margin: 0; }
+<hr class="divider">
 
-/* ---------- Cards ---------- */
-.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+<section id="pickups">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Airport pickup</span>
+      <h2>A smooth start to every trip</h2>
+    </div>
+    <div class="grid-3" id="pickups-grid">
+      <div class="loading">Loading transfers…</div>
+    </div>
+  </div>
+</section>
 
-.card {
-  background: rgba(0,0,0,0.55);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-.card-media { aspect-ratio: 4/3; background: linear-gradient(135deg, var(--ink-soft), var(--gold)); position: relative; overflow: hidden; }
-.card-media img { width: 100%; height: 100%; object-fit: cover; }
-.card-media .tag {
-  position: absolute; top: 12px; left: 12px;
-  background: rgba(251,244,230,0.92); color: var(--ink);
-  font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase;
-  padding: 4px 9px; border-radius: 20px; font-weight: 600;
-}
-.card-body { padding: 18px 18px 20px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
-.card-body h3 { font-size: 1.1rem; color: #fff; }
-.card-body p { font-size: 0.88rem; color: rgba(255,255,255,0.85); margin: 0; flex: 1; }
-.card-body .btn { justify-content: center; width: 100%; }
+<hr class="divider">
 
-.loading, .empty-state { color: var(--ink-soft); font-size: 0.9rem; padding: 20px 0; }
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Testimonials</span>
+      <h2>What clients say</h2>
+    </div>
+    <div class="grid-3">
+      <div class="testi">
+        <p>"Hotel was great. Location was excellent — close to everywhere I wanted to go. Staff was incredible."</p>
+        <footer>Demeail S.</footer>
+      </div>
+      <div class="testi">
+        <p>"Great space for events, catered to two events on separate floors without a hitch. Will be back."</p>
+        <footer>Ray Smith</footer>
+      </div>
+      <div class="testi">
+        <p>"Booking and paying online took five minutes. The itinerary matched exactly what we asked for."</p>
+        <footer>A. Whitfield</footer>
+      </div>
+    </div>
+  </div>
+</section>
 
-/* ---------- Testimonials ---------- */
-.testi { background: var(--sand-deep); border-radius: var(--radius); padding: 28px; border: 1px solid var(--line); }
-.testi p {
-  font-style: italic;
-  color: var(--ink);
-}
-.testi footer { margin-top: 14px; font-size: 0.85rem; font-weight: 600; font-style: normal; }
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-band">
+      <div>
+        <span class="eyebrow" style="color:var(--gold);">Get in touch</span>
+        <h2>Ready when you are</h2>
+      </div>
+      <div class="contact-links">
+        <span>+1 203 123 0606</span>
+        <span>info@shaneh.com</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-/* ---------- Contact / footer ---------- */
-.contact-band { background: var(--ink); color: var(--sand); border-radius: var(--radius); padding: 48px; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
-.contact-band h2 { color: var(--sand); }
-.contact-links { display: flex; gap: 28px; flex-wrap: wrap; }
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>©️ 2026 Shaneh No Limit Experience. All rights reserved.</div>
+    <ul>
+      <li><a href="#services">Tourism Agency</a></li>
+      <li><a href="#car-rentals">Car Rental</a></li>
+      <li><a href="#pickups">Airport Pick Up</a></li>
+      <li><a href="#trips">Trip Planning</a></li>
+      <li><a href="#">Terms &amp; Conditions</a></li>
+      <li><a href="admin.html">Admin</a></li>
+    </ul>
+  </div>
+</footer>
 
-footer.site-footer { border-top: 1px solid var(--line); padding: 40px 0; font-size: 0.85rem; color: var(--ink-soft); }
-.footer-grid { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
-.footer-grid ul { list-style: none; padding: 0; margin: 8px 0 0; display: flex; gap: 20px; flex-wrap: wrap; }
+<!-- Booking modal (shared for trips + car rentals + hotels + pickups) -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <button class="modal-close" id="modal-close" aria-label="Close">×</button>
+    <h3 id="modal-title">Book your trip</h3>
+    <div class="modal-sub" id="modal-sub"></div>
 
-/* ---------- Modal ---------- */
-.modal-overlay {
-  position: fixed; inset: 0; background: rgba(31,58,46,0.55);
-  display: none; align-items: center; justify-content: center; z-index: 100; padding: 20px;
-}
-.modal-overlay.open { display: flex; }
-.modal {
-  background: var(--sand); border-radius: var(--radius); max-width: 460px; width: 100%;
-  padding: 32px; position: relative; max-height: 90vh; overflow-y: auto;
-}
-.modal h3 { font-size: 1.4rem; margin-bottom: 6px; }
-.modal .modal-sub { font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 22px; }
-.modal-close { position: absolute; top: 18px; right: 18px; background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--ink); }
-.field { margin-bottom: 16px; }
-.field label { display: block; font-size: 0.75rem; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 6px; color: var(--ink-soft); }
-.field input, .field select {
-  width: 100%; padding: 11px 12px; border: 1px solid var(--line); border-radius: 3px;
-  font-family: var(--body); font-size: 0.92rem; background: #fff; color: var(--ink);
-}
-.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.modal-total { display: flex; justify-content: space-between; align-items: baseline; margin: 18px 0; padding-top: 14px; border-top: 1px solid var(--line); }
-.modal-total b { font-family: var(--display); font-size: 1.5rem; }
-.modal-error { color: var(--rust); font-size: 0.85rem; margin-top: 10px; display: none; }
-.modal-error.show { display: block; }
-.modal .btn { width: 100%; justify-content: center; }
-.modal .btn[disabled] { opacity: 0.6; cursor: not-allowed; }
+    <form id="booking-form">
+      <div id="trip-fields" style="display:none;">
+        <div class="field-row">
+          <div class="field">
+            <label for="f-adults">Adults</label>
+            <input type="number" id="f-adults" min="1" value="1">
+          </div>
+          <div class="field">
+            <label for="f-children">Children</label>
+            <input type="number" id="f-children" min="0" value="0">
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-start-date">Travel date</label>
+          <input type="date" id="f-start-date">
+        </div>
+      </div>
 
-/* ---------- Mobile nav ---------- */
-.nav-toggle {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 1.6rem;
-  color: #fff;
-  cursor: pointer;
-}
+      <div id="car-fields" style="display:none;">
+        <div class="field">
+          <label for="f-days">Number of days</label>
+          <input type="number" id="f-days" min="1" value="1">
+        </div>
+        <div class="field">
+          <label for="f-pickup-date">Pickup date</label>
+          <input type="date" id="f-pickup-date">
+        </div>
+      </div>
 
-/* ---------- Responsive ---------- */
-@media (max-width: 860px) {
-  .about-grid { grid-template-columns: 1fr; }
-  .search-bar { grid-template-columns: 1fr 1fr; }
-  .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; }
-  .contact-band { flex-direction: column; align-items: flex-start; }
+      <div id="hotel-fields" style="display:none;">
+        <div class="field">
+          <label for="f-nights">Number of nights</label>
+          <input type="number" id="f-nights" min="1" value="1">
+        </div>
+        <div class="field">
+          <label for="f-checkin-date">Check-in date</label>
+          <input type="date" id="f-checkin-date">
+        </div>
+      </div>
 
-  .wrap.nav { position: relative; flex-wrap: wrap; }
-  .nav-toggle { display: block; }
-  .nav-links {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--sand);
-    flex-direction: column;
-    padding: 20px 24px;
-    gap: 16px;
-    border-bottom: 1px solid var(--line);
-    z-index: 50;
+      <div id="pickup-fields" style="display:none;">
+        <div class="field">
+          <label for="f-arrival-date">Arrival date</label>
+          <input type="date" id="f-arrival-date">
+        </div>
+        <div class="field">
+          <label for="f-flight-number">Flight number</label>
+          <input type="text" id="f-flight-number" placeholder="e.g. BA249">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="f-name">Full name</label>
+        <input type="text" id="f-name" required>
+      </div>
+      <div class="field">
+        <label for="f-email">Email</label>
+        <input type="email" id="f-email" required>
+      </div>
+      <div class="field">
+        <label for="f-phone">Phone (optional, for SMS confirmation)</label>
+        <input type="tel" id="f-phone" placeholder="+1 555 123 4567">
+      </div>
+
+      <div class="modal-total">
+        <span>Total</span>
+        <b id="modal-total-amount">$0.00</b>
+      </div>
+
+      <button type="submit" class="btn gold" id="modal-submit">Continue to payment</button>
+      <div class="modal-error" id="modal-error">Something went wrong. Please try again.</div>
+    </form>
+  </div>
+</div>
+<script src="config.js"></script>
+<script src="main.js"></script>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+</script>
+<script>
+  const slides = document.querySelectorAll('.hero-slide');
+  let slideIndex = 0;
+  function showNextSlide() {
+    slides[slideIndex].classList.remove('active');
+    slideIndex = (slideIndex + 1) % slides.length;
+    slides[slideIndex].classList.add('active');
   }
-  .nav-links.open { display: flex; }
-  .nav-links.open a { color: var(--ink); }
-
-  .hero-slides { min-height: 100vh; }
-  .hero-slide-inner { padding: 24px; padding-top: 100px; }
-  .hero-logo-overlay { width: 38px; top: 8px; left: auto; right: 16px; transform: none; }
-  .search-bar > div:last-child { grid-column: 1 / -1; }
-}
-
-@media (max-width: 560px) {
-  .grid-3, .grid-4 { grid-template-columns: 1fr; }
-  .field-row { grid-template-columns: 1fr; }
-  section { padding: 60px 0; }
-  .stat-row { flex-wrap: wrap; gap: 24px; }
-  .search-bar { grid-template-columns: 1fr; }
-  .hero-logo-overlay { width: 32px; top: 8px; left: auto; right: 12px; transform: none; }
-  .contact-band { padding: 28px; }
-  .modal { padding: 22px; }
-}
+  setInterval(showNextSlide, 4500);
+</script>
+</body>
+</html>
