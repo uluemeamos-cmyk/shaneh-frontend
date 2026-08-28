@@ -387,18 +387,3 @@ loadTrips();
 loadCars();
 loadHotels();
 loadPickups();
-window.addEventListener('load', function() {
-  setTimeout(function() {
-    document.querySelectorAll('.card-body h3').forEach(function(h3) {
-      const title = h3.textContent.trim().toLowerCase();
-      const img = h3.closest('.card').querySelector('.card-media img');
-      if (!img) return;
-      if (title.includes('extreme') || title.includes('thrills')) {
-        img.src = 'skydive2.jpg';
-      }
-      if (title.includes('bungee')) {
-        img.src = 'anoof-junaid-J16ep2LfHwY-unsplash.jpg';
-      }
-    });
-  }, 1500);
-});
